@@ -23,19 +23,26 @@ void doQuestionOne() {
 }
 
 void doQuestionTwo() {
-    Elves elves;
     string myText;
     ifstream MyReadFile("/Users/rmdy/development/AdventOfCode/params.txt");
+    int squareFeetOfWrappingPaper = 0;
+    int squareFeetOfWrappingForRibbon = 0;
     while (getline(MyReadFile, myText)) {
-        string length = myText.substr(0, myText.find('x'));
-        string width = myText.substr(myText.find_first_of('x') + 1, myText.find_last_of('x') - myText.find_first_of('x') - 1);
-        string height = myText.substr(myText.find_last_of('x') + 1);
-        cout << "Length " + length << "\n";
-        cout << "Width " + width << "\n";
-        cout << "Height " + height << "\n";
-        std::cout << myText << "\n";
+        string lengthS = myText.substr(0, myText.find('x'));
+        string widthS = myText.substr(myText.find_first_of('x') + 1, myText.find_last_of('x') - myText.find_first_of('x') - 1);
+        string heightS = myText.substr(myText.find_last_of('x') + 1);
+        int lenght = stoi(lengthS);
+        int width = stoi(widthS);
+        int height = stoi(heightS);
+        squareFeetOfWrappingPaper += Elves::calculateBox(lenght,height,width);
+        squareFeetOfWrappingForRibbon += Elves::calculateRibbon(lenght,height,width);
     }
     MyReadFile.close();
+    //cout <<  + squareFeetOfWrappingPaper  << "\n";
+    cout <<  + squareFeetOfWrappingForRibbon  << "\n";
+    cout <<  + Elves::calculateRibbon(2,3,4)  << "\n";
+    cout <<  + Elves::calculateRibbon(1,1,10)  << "\n";
+
 }
 
 int main() {
