@@ -8,7 +8,6 @@
 class Santa {
 public:
     int calculateFloorBasedOnInput(string input);
-
     int calculateFirstEncounterWithBasement(string input);
 };
 
@@ -29,6 +28,7 @@ int Santa::calculateFloorBasedOnInput(string input) {
 int Santa::calculateFirstEncounterWithBasement(string input) {
     int count_of_opening = 0;
     int count_of_closing = 0;
+    const int BASEMENT = -1;
     for (int counter = 0; counter < input.length(); counter++) {
         char i = input[counter];
         if (i == '(') {
@@ -36,7 +36,7 @@ int Santa::calculateFirstEncounterWithBasement(string input) {
         } else if (i == ')') {
             count_of_closing++;
         }
-        if (count_of_closing > count_of_opening && count_of_opening - count_of_closing == -1) {
+        if (count_of_closing > count_of_opening && count_of_opening - count_of_closing == BASEMENT) {
             return counter + 1;
         }
     }
