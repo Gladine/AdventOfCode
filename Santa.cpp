@@ -46,6 +46,21 @@ void doQuestionTwo() {
     cout << +squareFeetOfWrappingForRibbon << "\n";
 }
 
+void add_coordinates_to_set(set<std::string> &starting_point, char CURRENT_CHARACTER, int &x, int &y) {
+    if (CURRENT_CHARACTER == '^') {
+        y++;
+    } else if (CURRENT_CHARACTER == 'v') {
+        y--;
+    } else if (CURRENT_CHARACTER == '<') {
+        x--;
+    } else if (CURRENT_CHARACTER == '>') {
+        x++;
+    }
+    string coordinates(to_string(x) + "-" + to_string(y));
+    starting_point.insert(coordinates);
+    cout << coordinates << endl;
+}
+
 void doQuestionThree() {
     set<std::string> starting_point = {"0-0"};
     //read file
@@ -54,23 +69,19 @@ void doQuestionThree() {
     // variable to store character
     char CURRENT_CHARACTER;
     // This is the starting point
-    int x = 0;
-    int y = 0;
+    int a,b, x,y = 0;
+    int SANTA = 0;
     // Calculate position
     while (MyReadFile.get(CURRENT_CHARACTER)) {
-        if (CURRENT_CHARACTER == '^') {
-            y++;
-        } else if (CURRENT_CHARACTER == 'v') {
-            y--;
-        } else if (CURRENT_CHARACTER == '<') {
-            x--;
-        } else if (CURRENT_CHARACTER == '>') {
-            x++;
+        if (SANTA == 0) {
+            cout << "Adding to SANTA"<< endl;
+            add_coordinates_to_set(starting_point, CURRENT_CHARACTER, x, y);
+            SANTA++;
+        } else if (SANTA ==1) {
+            cout << "Adding to Robot" << endl;
+            add_coordinates_to_set(starting_point, CURRENT_CHARACTER, a, b);
+            SANTA--;
         }
-        cout << CURRENT_CHARACTER << endl;
-        string coordinates(to_string(x) + "-" + to_string(y));
-        cout << coordinates << endl;
-        starting_point.insert(coordinates);
     }
     MyReadFile.close();
     cout << starting_point.size() << endl;
